@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's POV</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌹</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #yesBtn {
+            transition: all 0.2s ease-out;
+            /* We start with relative so it sits in the flexbox, 
+               then JS will switch it to absolute on the first hover */
+            position: relative; 
+            z-index: 20;
+        }
+        #noBtn {
+            transition: all 0.3s ease-in-out;
+            z-index: 10;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.95);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-white flex flex-col items-center justify-center min-h-screen overflow-hidden p-4">
+
+    <div id="main-content" class="text-center">
+        <img src="ruto.jpg" alt="Ruto with Rose" class="w-64 h-64 object-cover rounded-full border-4 border-pink-500 mb-6 mx-auto shadow-lg shadow-pink-500/20">
+        
+        <h1 class="text-3xl md:text-5xl font-bold mb-12 px-4">Will you be my Valentine? 🌹</h1>
+
+        <div id="btnContainer" class="flex justify-center items-center gap-12 h-40">
+            <button id="yesBtn" class="bg-pink-600 hover:bg-pink-500 px-10 py-4 rounded-full font-bold shadow-lg whitespace-nowrap">
+                Yes
+            </button>
+
+            <button id="noBtn" onclick="showRejection()" class="bg-slate-700 hover:bg-slate-600 px-10 py-4 rounded-full font-bold whitespace-nowrap">
+                No
+            </button>
+        </div>
+    </div>
+
+    <div id="rejectionModal" class="modal">
+        <img src="rejected.jpg" class="max-w-[90%] max-h-[70%] rounded-lg border-2 border-white mb-6">
+        <h2 class="text-5xl font-black text-yellow-400 uppercase italic tracking-taller">It's a Prank! 😂</h2>
+        <button onclick="location.reload()" class="mt-8 text-slate-400 underline">Try again?</button>
+    </div>
+
+    <script>
+        const yesBtn = document.getElementById('yesBtn');
+        const noBtn = document.getElementById('noBtn');
+        const modal = document.getElementById('rejectionModal');
+        let noSize = 1;
+        let isFirstHover = true;
+
+        const moveButton = () => {
+            // On the very first hover, we switch to absolute so it can fly anywhere
+            if (isFirstHover) {
+                yesBtn.style.position = 'absolute';
+                isFirstHover = false;
+            }
+
+            // Calculate random positions (keeping it away from the edges)
+            const x = Math.random() * (window.innerWidth - yesBtn.offsetWidth - 20);
+            const y = Math.random() * (window.innerHeight - yesBtn.offsetHeight - 20);
+            
+            yesBtn.style.left = `${x}px`;
+            yesBtn.style.top = `${y}px`;
+
+            // Make the 'No' button grow
+            noSize += 0.5; 
+            noBtn.style.transform = `scale(${noSize})`;
+        };
+
+        // Desktop and Mobile listeners
+        yesBtn.addEventListener('mouseenter', moveButton);
+        yesBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveButton();
+        });
+
+        function showRejection() {
+            modal.style.display = 'flex';
+        }
+    </script>
+    <div class="fixed bottom-6 left-0 right-0 flex justify-center pointer-events-none">
+        <a href="https://egbert-joel.vercel.app/" target="_blank" rel="noopener noreferrer"
+        class="pointer-events-auto bg-slate-900/50 backdrop-blur-md border border-white/10 px-6 py-2 rounded-full text-xs font-semibold text-white/70 hover:text-white hover:border-pink-500/50 transition-all duration-300 shadow-xl">
+        Need a custom site? 🚀
+        </a>
+    </div>
+</body>
+</html>
