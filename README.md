@@ -3,7 +3,7 @@
 A high-stakes, chaotic Valentine's Day landing page where the "Yes" button has trust issues and the "No" button has a massive growth spurt. Built for maximum engagement and viral potential.
 
 ## 🚀 Live Demo
-[View the Prank Live!](https://valentines-prank-2026.vercel.app) 
+[View the Prank Live!](https://valentine-prank-2026.vercel.app) 
 
 ## ✨ Features
 - **Evasive UI:** The "Yes" button uses real-time mouse/touch tracking to dodge the user with pinpoint accuracy.
